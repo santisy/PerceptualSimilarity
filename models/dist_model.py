@@ -5,7 +5,7 @@ import os
 from collections import OrderedDict
 from torch.autograd import Variable
 import itertools
-import util.util as util
+import LPIPS.util.util as util
 from .base_model import BaseModel
 from . import networks_basic as networks
 from scipy.ndimage import zoom
@@ -49,7 +49,7 @@ class DistModel(BaseModel):
             kw = {}
             if not use_gpu:
                 kw['map_location'] = 'cpu'
-            self.net.load_state_dict(torch.load('./weights/%s.pth'%net, **kw))
+            self.net.load_state_dict(torch.load('./LPIPS/weights/%s.pth'%net, **kw))
         elif(self.model=='net'): # pretrained network
             assert not self.spatial, 'spatial argument not supported yet for uncalibrated networks'
             self.net = networks.PNet(use_gpu=use_gpu,pnet_type=net)
